@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Striter Alfa",
+    "id": "288834890772905984"
+  },
+  "url": [
+    "dropescan.com",
+    "www.dropescan.com"
+  ],
+  "description": {
+    "en": "DROPE - The salvation of your dropped manga!",
+    "pt_BR": "DROPE – A salvação do seu manga dropado!"
+  },
+  "service": "Drope Scan",
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/MO2jmZe.png",
+  "thumbnail": "https://i.imgur.com/lMk2c61.png",
+  "color": "#ff3048",
+  "tags": [
+    "anime",
+    "manga"
+  ],
+  "category": "anime"
+}
