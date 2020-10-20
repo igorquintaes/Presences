@@ -1,19 +1,17 @@
 const presence = new Presence({
     clientId: "572793863354187803"
-  }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+  });
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "drope_s",
-      startTimestamp: browsingStamp
+      largeImageKey: "drope_s"
     },
     pathname = document.location.pathname,
     hostname = document.location.hostname;
 
   if (hostname === "dropescan.com" || hostname === "www.dropescan.com") {    
-    presenceData.details = "Vendo:";
-    presenceData.state = "Website Drope Scan";
+    presenceData.details = "Lendo em:";
+    presenceData.state = "dropescan.com";
 
     if (document.querySelector(".manga-search-form") != null)
     {
@@ -30,8 +28,18 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Lista de Mangás";
       
       if (document.querySelector(".profile-manga") != null) {
-        const information = document.querySelector(".post-title h1").textContent.trim();
-        presenceData.details = "Vendo Mangá:";
+        let information = document.querySelector(".post-title h1").textContent.trim();
+        if (document.querySelector(".post-title h1 span") != null) {
+          information = information.slice(document.querySelector(".post-title h1 span").textContent.trimStart().length).trim();
+        }
+        
+        if (document.querySelector(".wp-manga-tags-list a[href*=destaque]") != null) {
+          const personalImageKey = information.toLowerCase().split(' ').join('_');
+          presenceData.largeImageKey = personalImageKey;
+          presenceData.smallImageKey = "drope_s";
+        }
+
+        presenceData.details = "Projeto:";
         presenceData.state = information;
       }
 
@@ -41,6 +49,12 @@ presence.on("UpdateData", async () => {
                 .getAttribute("content"),
               mangaName = mangaProperties.split(" - ")[0],
               chapterName = mangaProperties.split(" - ")[1];
+        
+        if (document.querySelector(".wp-manga-tags-list a[href*=destaque]") != null) {
+          const personalImageKey = mangaName.toLowerCase().replace(' ', '_');
+          presenceData.largeImageKey = personalImageKey;
+          presenceData.smallImageKey = "drope_s";
+        }
         
         presenceData.details = mangaName;
         presenceData.state = "Capítulo: " + chapterName;
